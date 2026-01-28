@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Web App - EMI & Loan Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4b6cb7;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        main {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        form label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        form button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #4b6cb7;
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        form button:hover {
+            background-color: #3a53a2;
+        }
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #eef2f7;
+            border-radius: 8px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            main {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Smart Web App</h1>
+        <p>EMI & Loan Calculator</p>
+    </header>
+
+    <main>
+        <form method="POST">
+            <label for="principal">Principal Amount (₹)</label>
+            <input type="number" id="principal" name="principal" placeholder="Enter principal amount" required>
+
+            <label for="rate">Annual Interest Rate (%)</label>
+            <input type="number" step="0.01" id="rate" name="rate" placeholder="Enter interest rate" required>
+
+            <label for="time">Time (Years)</label>
+            <input type="number" id="time" name="time" placeholder="Enter duration in years" required>
+
+            <button type="submit">Calculate EMI</button>
+        </form>
+
+        {% if emi %}
+            <div class="result">
+                Monthly EMI: <strong>₹{{ emi }}</strong>
+            </div>
+        {% endif %}
+
+        {% if loan_amount %}
+            <div class="result">
+                Total Loan Amount: <strong>₹{{ loan_amount }}</strong>
+            </div>
+        {% endif %}
+    </main>
+</body>
+</html>
+
+
